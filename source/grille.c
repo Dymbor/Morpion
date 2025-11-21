@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #include "../headers/grille.h"
 
@@ -44,5 +45,9 @@ void afficheGrille(int grille[TAILLE][TAILLE])
         printf("\n");
     }
     printf("-------------------\n");
+}
 
+bool estCaseVide(int grille[TAILLE][TAILLE],int ligne, int colone)
+{
+    return grille[ligne][colone] == VIDE;
 }

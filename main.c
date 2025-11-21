@@ -9,6 +9,7 @@ int main()
 
     setGrilleVide(grille);
     afficheGrille(grille);
+    
 
     return 0;
 }
