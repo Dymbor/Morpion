@@ -51,3 +51,10 @@ bool estCaseVide(int grille[TAILLE][TAILLE],int ligne, int colone)
 {
     return grille[ligne][colone] == VIDE;
 }
+
+void effaceConsole()
+{
+    if(system("clear") != 0){
+        printf("La console n'as pas pus etre effacer");
+    }
+}
