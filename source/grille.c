@@ -17,44 +17,67 @@ void setGrilleVide(int grille[TAILLE][TAILLE])
 
 void afficheGrille(int grille[TAILLE][TAILLE])
 {
+    //ligne haut
+    printf("      A     B     C     D\n");
+    printf("   ┌─────┬─────┬─────┬─────┐\n");
     for (int i = 0; i < TAILLE; i++)
     {
-        printf("-------------------\n");
-        printf("| ");
+        printf(" %i │ ", i + 1);
+
+        // affichage d'une ligne
         for (int j = 0; j < TAILLE; j++)
         {
-            switch (grille[i][j])
-            {
-            case VIDE:
-                printf("[ ] | ");
-                break;
-
-            case CERCLE:
-                printf("[\x1b[36mO\x1b[0m] | "); // Cercle bleue
-                break;
-
-            case CROIX:
-                printf("[\x1b[31mX\x1b[0m] | "); // Croix rouge
-                break;
-
-            default:
-                printf("%i",grille[i][j]);
-                break;
+            afficheCaseCouleur(grille[i][j]);
+            if (j < TAILLE - 1){
+                printf(" │ ");
+            }
+            else{
+                printf(" │\n");
             }
         }
-        printf("\n");
+
+        //affichage séparateur
+        if (i < TAILLE - 1){
+            printf("   ├─────┼─────┼─────┼─────┤\n");
+        }
+        else{
+            printf("   └─────┴─────┴─────┴─────┘\n");
+        }
+
     }
-    printf("-------------------\n");
 }
 
-bool estCaseVide(int grille[TAILLE][TAILLE],int ligne, int colone)
+void afficheCaseCouleur(int camp)
+{
+    switch (camp)
+    {
+    case VIDE:
+        printf("   ");
+        break;
+
+    case CERCLE:
+        printf(" \x1b[36mO\x1b[0m "); // Affiche un cercle bleue
+        break;
+
+    case CROIX:
+        printf(" \x1b[31mX\x1b[0m "); // Affiche une croix rouge
+        break;
+
+    default:
+        printf("%i", camp);
+        break;
+    }
+}
+
+bool estCaseVide(int grille[TAILLE][TAILLE], int ligne, int colone)
 {
     return grille[ligne][colone] == VIDE;
 }
 
 void effaceConsole()
 {
-    if(system("clear") != 0){
+    if (system("clear") != 0) //verifie que la console est correctement effacer
+    {
         printf("La console n'as pas pus etre effacer");
     }
 }
