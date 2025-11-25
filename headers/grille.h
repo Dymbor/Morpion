@@ -14,5 +14,6 @@ void afficheGrille(int grille[TAILLE][TAILLE]);
 void afficheCaseCouleur(int camp);
 bool estCaseVide(int grille[TAILLE][TAILLE],int ligne, int colone);
 void effaceConsole();
+bool estCoupValide(int grille[TAILLE][TAILLE],int ligne, int colone);
 
 #endif

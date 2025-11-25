@@ -81,3 +81,13 @@ void effaceConsole()
         printf("La console n'as pas pus etre effacer");
     }
 }
+
+bool estCoupValide(int grille[TAILLE][TAILLE],int ligne, int colone){
+    if(ligne < 1 || ligne > TAILLE || colone < 1 || colone > 1 || !estCaseVide(grille,ligne,colone)){
+        printf("Le coup n'est pas valide\n");
+        return false;
+    }
+    else{
+        return true;
+    }
+}

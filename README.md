@@ -33,3 +33,5 @@ Cette fonction renvoie `True` si la case spécifier du tableau est vide
 - `void effaceConsole();`:
 Cette fonction efface l'affichage de la console
 
+- `bool estCoupValide(int grille[TAILLE][TAILLE],int ligne, int colone);` :
+Vérifie qu'un coup est jouable (contenue dans la grille et vise une case vide)
