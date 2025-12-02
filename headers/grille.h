@@ -16,5 +16,6 @@ void afficheGrille(int grille[TAILLE][TAILLE]);
 bool estCaseVide(int grille[TAILLE][TAILLE], int ligne, int colone);
 bool estCoupValide(int grille[TAILLE][TAILLE], int ligne, int colone);
 void convertitCoordonnees(char coordLetttre[2], int coordConvertie[2]);
-
+int estPartieFinis(int grille[TAILLE][TAILLE]);
+bool estGrilleRemplis(int grille[TAILLE][TAILLE]);
 #endif
