@@ -86,10 +86,21 @@ void effaceConsole()
     }
 }
 
+bool estDansGrille(int grille[TAILLE][TAILLE],int ligne, int colone){
+    if(ligne < 0 || ligne >= TAILLE || colone < 0 || colone >= TAILLE){
+        return false;
+    }
+    return true;
+}
+
+bool estCoupValide(int grille[TAILLE][TAILLE],int ligne, int colone){
+    if(!estDansGrille(grille,ligne,colone) || !estCaseVide(grille,ligne,colone)){
+
 bool estCoupValide(int grille[TAILLE][TAILLE], int ligne, int colone)
 {
     if (ligne < 0 || ligne >= TAILLE || colone < 0 || colone >= TAILLE || !estCaseVide(grille, ligne, colone))
     {
+
         printf("Le coup n'est pas valide\n");
         return false;
     }
