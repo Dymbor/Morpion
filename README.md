@@ -16,7 +16,7 @@ Jeux de morpion réaliser en langage C
 
 ### grille.c
 
-Ce fichier contient toute les fonction qui sont lié à la gestion de la grille:
+Ce fichier contient toute les fonctions qui sont liées à la gestion de la grille:
 
 - `void setGrilleVide(int grille[TAILLE][TAILLE]);` :
 Cette fonction permet de réintialiser la grille en vidant toute les cases
