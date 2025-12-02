@@ -83,7 +83,7 @@ void effaceConsole()
 }
 
 bool estDansGrille(int grille[TAILLE][TAILLE],int ligne, int colone){
-    if(ligne < 1 || ligne > TAILLE || colone < 1 || colone > 1){
+    if(ligne < 0 || ligne >= TAILLE || colone < 0 || colone >= TAILLE){
         return false;
     }
     return true;
