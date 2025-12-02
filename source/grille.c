@@ -126,3 +126,62 @@ void convertitCoordonnees(char coordLetttre[2], int coordConvertie[2])
         break;
     }
 }
+
+int estPartieFinis(int grille[TAILLE][TAILLE])
+{
+    // on choisi les retour en fonction du resultat: 0: partie non finis, 1(croix): croix a gagner, 2(cercle): cercle a gagner, 3: match nul
+
+    // premiere etape on verifie les lignes
+    for (int i = 0; i < TAILLE; i++)
+    {
+        if (grille[i][0] == grille[i][1] && grille[i][1] == grille[i][2] && grille[i][2] == grille[i][3] && grille[i][0] != VIDE)
+        { // on vérifie que toute les case d'une ligne sont égale et différente de vide
+            return grille[i][0];
+        }
+    }
+
+    // seconde etape on verifie les colones
+    for (int i = 0; i < TAILLE; i++)
+    {
+        if (grille[0][i] == grille[1][i] && grille[1][i] == grille[2][i] && grille[2][i] == grille[3][i] && grille[0][i] != VIDE)
+        {
+            return grille[0][i];
+        }
+    }
+
+    // troisieme etape on verifie les deux diagonale
+    // premiere diagonale:
+    if (grille[0][0] == grille[1][1] && grille[1][1] == grille[2][2] && grille[2][2] == grille[3][3] && grille[0][0] != VIDE)
+    {
+        return grille[0][0];
+    }
+    // seconde diagonale:
+    if (grille[0][3] == grille[1][2] && grille[1][2] == grille[2][1] && grille[2][1] == grille[3][0] && grille[0][3] != VIDE)
+    {
+        return grille[0][3];
+    }
+
+    // etape quatre on verifie s'il y as match nul
+    if (estGrilleRemplis(grille))
+    {
+        return 3;
+    }
+
+    // la partie n'est pas finis
+    return 0;
+}
+
+bool estGrilleRemplis(int grille[TAILLE][TAILLE])
+{
+    for(int i = 0; i < TAILLE; i ++)
+    {
+        for(int j = 0; j < TAILLE; j++)
+        {
+            if(grille[i][j] == VIDE)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
