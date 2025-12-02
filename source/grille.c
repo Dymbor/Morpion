@@ -39,7 +39,7 @@ void afficheGrille(int grille[TAILLE][TAILLE])
             }
         }
 
-        // affichage séparateur
+        // affichage séparateurs
         if (i < TAILLE - 1)
         {
             printf("   ├─────┼─────┼─────┼─────┤\n");
@@ -60,7 +60,7 @@ void afficheCaseCouleur(int camp)
         break;
 
     case CERCLE:
-        printf(" \x1b[36mO\x1b[0m "); // Affiche un cercle bleue
+        printf(" \x1b[36mO\x1b[0m "); // Affiche un cercle bleu
         break;
 
     case CROIX:
@@ -80,9 +80,9 @@ bool estCaseVide(int grille[TAILLE][TAILLE], int ligne, int colone)
 
 void effaceConsole()
 {
-    if (system("clear") != 0) // verifie que la console est correctement effacer
+    if (system("clear") != 0) // verifie que la console est correctement effacée
     {
-        printf("La console n'as pas pus etre effacer");
+        printf("La console n'a pas pu etre effacée");
     }
 }
 
@@ -97,7 +97,6 @@ bool estCoupValide(int grille[TAILLE][TAILLE], int ligne, int colone)
 {
     if (ligne < 0 || ligne >= TAILLE || colone < 0 || colone >= TAILLE || !estCaseVide(grille, ligne, colone))
     {
-
         printf("Le coup n'est pas valide\n");
         return false;
     }
@@ -130,20 +129,20 @@ void convertitCoordonnees(char coordLetttre[2], int coordConvertie[2])
         break;
 
     default:
-        coordConvertie[0] = 99; // on donne une valeur trop grand pour que le résultat ne passe pas dans les fonction de vérification
+        coordConvertie[0] = 99; // on donne une valeur trop grande pour que le résultat ne passe pas dans les fonctions de vérification
         break;
     }
 }
 
-int estPartieFinis(int grille[TAILLE][TAILLE])
+int estPartieFinie(int grille[TAILLE][TAILLE])
 {
-    // on choisi les retour en fonction du resultat: 0: partie non finis, 1(croix): croix a gagner, 2(cercle): cercle a gagner, 3: match nul
+    // on choisit les retours en fonction du resultat: 0: partie non finie, 1(croix): croix a gagner, 2(cercle): cercle a gagner, 3: match nul
 
     // premiere etape on verifie les lignes
     for (int i = 0; i < TAILLE; i++)
     {
         if (grille[i][0] == grille[i][1] && grille[i][1] == grille[i][2] && grille[i][2] == grille[i][3] && grille[i][0] != VIDE)
-        { // on vérifie que toute les case d'une ligne sont égale et différente de vide
+        { // on vérifie que toutes les cases d'une ligne sont égales et différentes de vide
             return grille[i][0];
         }
     }
@@ -157,7 +156,7 @@ int estPartieFinis(int grille[TAILLE][TAILLE])
         }
     }
 
-    // troisieme etape on verifie les deux diagonale
+    // troisieme etape on verifie les deux diagonales
     // premiere diagonale:
     if (grille[0][0] == grille[1][1] && grille[1][1] == grille[2][2] && grille[2][2] == grille[3][3] && grille[0][0] != VIDE)
     {
@@ -169,17 +168,17 @@ int estPartieFinis(int grille[TAILLE][TAILLE])
         return grille[0][3];
     }
 
-    // etape quatre on verifie s'il y as match nul
-    if (estGrilleRemplis(grille))
+    // etape quatre on verifie s'il y a match nul
+    if (estGrilleRemplie(grille))
     {
         return 3;
     }
 
-    // la partie n'est pas finis
+    // la partie n'est pas finie
     return 0;
 }
 
-bool estGrilleRemplis(int grille[TAILLE][TAILLE])
+bool estGrilleRemplie(int grille[TAILLE][TAILLE])
 {
     for(int i = 0; i < TAILLE; i ++)
     {

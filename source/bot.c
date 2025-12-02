@@ -10,7 +10,7 @@ void jouerBot(int grille[TAILLE][TAILLE])
 {
     int ligne;
     int col;
-    // on cherche à jouer le meilleur coup dans cette ordre : Victoire -> BloqueVictoire -> Centre -> Coins -> Coté
+    // on cherche à jouer le meilleur coup dans cette ordre : Victoire -> BloqueVictoire -> Centre -> Coins -> Bordures
     //on tente de gagner
     if (trouverCoupGagnant(grille))
     {
@@ -23,7 +23,7 @@ void jouerBot(int grille[TAILLE][TAILLE])
         return;
     }
 
-    // si des cases sont dispo on prend le centre
+    // si des cases sont dispos on prend le centre
     if (prendreCentre(grille, &ligne, &col))
     {
         jouerCoup(grille, ligne, col, CROIX);
@@ -37,14 +37,14 @@ void jouerBot(int grille[TAILLE][TAILLE])
         return;
     }
 
-    //s'il n'y as plus rien on prend le bord de la grille
+    //s'il n'y a plus rien on prend le bord de la grille
     if (prendreBord(grille, &ligne, &col))
     {
         jouerCoup(grille, ligne, col, CROIX);
         return;
     }
 
-    //piste d'amélioration: impleter un algorithme min max si le temps le permet
+    //piste d'amélioration: implémenter un algorithme min max si le temps le permet
 }
 
 bool trouverCoupGagnant(int grille[TAILLE][TAILLE])
@@ -56,7 +56,7 @@ bool trouverCoupGagnant(int grille[TAILLE][TAILLE])
             if (grille[i][j] == VIDE)
             {
                 jouerCoup(grille,i,j,CROIX);
-                if (estPartieFinis(grille) == CROIX)
+                if (estPartieFinie(grille) == CROIX)
                 {
                     return true;
                 }
@@ -76,7 +76,7 @@ bool trouverCoupBloquant(int grille[TAILLE][TAILLE])
             if (grille[i][j] == VIDE)
             {
                 jouerCoup(grille,i,j,CERCLE);
-                if (estPartieFinis(grille) == CERCLE)
+                if (estPartieFinie(grille) == CERCLE)
                 {
                     grille[i][j] = VIDE;
                     jouerCoup(grille,i,j,CROIX);
