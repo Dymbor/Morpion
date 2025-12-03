@@ -7,63 +7,93 @@
 int main()
 {
     int grille[TAILLE][TAILLE];
-    char coordLettre[3];       // pour stocker "A1" (+ '\0')
-    int coordConvertie[2];     // stock les coordonees converti en chiffre pour le tableau
-    int resultat = 0;          
+    char coordLettre[3];
+    int coordConvertie[2];
+    int resultat = 0;
 
-    setGrilleVide(grille);
+    int scoreNul = 0, scoreJoueur = 0, scoreOrdi = 0;
 
-    while ((resultat = estPartieFinie(grille)) == 0)
+    int choix = 1;
+
+    while (choix != 2)
     {
-        afficheGrille(grille);
+        printf("Jeu du morpion\n");
+        printf("Score : Ordinateur : %d  Joueur : %d\n", scoreOrdi, scoreJoueur);
+        printf("Jouer : 1\n");
+        printf("Arreter : 2\n");
+        printf("Votre choix : ");
+        scanf("%d", &choix);
 
-        // --- Tour du joueur ---
-        printf("Joueur, entrez des coordonnee (ex: A1, B3) : ");
-        scanf("%2s", coordLettre);
-        convertitCoordonnees(coordLettre, coordConvertie);
+        if (choix == 2) 
+            break;
 
-        // Vérification du coup
-        while (!estCoupValide(grille, coordConvertie[1], coordConvertie[0]))
+        if (choix != 1)
         {
-            printf("Coup invalide, reessayez : ");
-            scanf("%2s", coordLettre);
-            convertitCoordonnees(coordLettre, coordConvertie);
+            printf("Choix invalide.\n\n");
+            continue;
         }
 
-        jouerCoup(grille, coordConvertie[1], coordConvertie[0], CERCLE);
+        setGrilleVide(grille);
+        resultat = 0;
 
-        // Vérification si le joueur gagne
-        resultat = estPartieFinie(grille);
-        if (resultat != 0) break;
+        while ((resultat = estPartieFinie(grille)) == 0)
+        {
+            printf("\x1b[1;4mScore actuel :\x1b[0m\n");
+            printf("Joueur : %i\n", scoreJoueur);
+            printf("Ordinateur : %i\n", scoreOrdi);
+            printf("Match nul : %i\n", scoreNul);
+            afficheGrille(grille);
+
+            printf("Joueur, entrez des coordonnee (ex: A1, B3) : ");
+            scanf("%2s", coordLettre);
+            convertitCoordonnees(coordLettre, coordConvertie);
+
+            while (!estCoupValide(grille, coordConvertie[1], coordConvertie[0]))
+            {
+                printf("Coup invalide, reessayez : ");
+                scanf("%2s", coordLettre);
+                convertitCoordonnees(coordLettre, coordConvertie);
+            }
+
+            jouerCoup(grille, coordConvertie[1], coordConvertie[0], CERCLE);
+
+            resultat = estPartieFinie(grille);
+            if (resultat != 0)
+                break;
+
+            effaceConsole();
+
+            jouerBot(grille);
+            printf("Tour du bot...\n");
+
+            resultat = estPartieFinie(grille);
+        }
 
         effaceConsole();
+        afficheGrille(grille);
 
-        // --- Tour du bot ---
-        jouerBot(grille);
-        printf("Tour du bot...\n");
-
-        resultat = estPartieFinie(grille);
+        switch (resultat)
+        {
+        case CROIX:
+            printf("Le bot (\x1b[31mX\x1b[0m) a gagne !\n");
+            scoreOrdi++;
+            break;
+        case CERCLE:
+            printf("Bravo ! Vous (\x1b[36mO\x1b[0m) avez gagne !\n");
+            scoreJoueur++;
+            break;
+        case 3:
+            printf("Match nul !\n");
+            scoreNul++;
+            break;
+        }
     }
-
     effaceConsole();
-    afficheGrille(grille);
-
-    // --- Résultat final ---
-    switch (resultat)
-    {
-    case CROIX:
-        printf("Le bot (\x1b[31mX\x1b[0m) a gagne !\n");
-        break;
-    case CERCLE:
-        printf("Bravo ! Vous (\x1b[36mO\x1b[0m) avez gagne !\n");
-        break;
-    case 3:
-        printf("Match nul !\n");
-        break;
-    default:
-        printf("Erreur dans le resultat.\n");
-        break;
-    }
+    printf("\x1b[31;5mGAME OVER\x1b[0m\n");
+    printf("\x1b[1;4;33mScore final :\x1b[0m\n");
+    printf("Joueur : %i\n", scoreJoueur);
+    printf("Ordinateur : %i\n", scoreOrdi);
+    printf("Match nul : %i\n\n", scoreNul);
 
     return 0;
 }
