@@ -17,8 +17,8 @@ int main()
 
     while (choix != 2)
     {
-        printf("Jeu du morpion\n");
-        printf("Score : Ordinateur : %d  Joueur : %d\n", scoreOrdi, scoreJoueur);
+        printf("\x1b[1;4mJeu du morpion\x1b[0m\n");
+        printf("Score : \nOrdinateur : %d  Joueur : %d\n\n", scoreOrdi, scoreJoueur);
         printf("Jouer : 1\n");
         printf("Arreter : 2\n");
         printf("Votre choix : ");
